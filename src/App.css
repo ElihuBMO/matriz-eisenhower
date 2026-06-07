@@ -329,3 +329,118 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   MODO OSCURO (DARK MODE)
+   ========================================= */
+
+body.dark {
+    background-color: #0f172a; /* Fondo principal muy oscuro */
+    color: #f8fafc;
+}
+
+body.dark .header,
+body.dark .inbox,
+body.dark .quadrant,
+body.dark .task-card,
+body.dark .new-task-form,
+body.dark .category-manager {
+    background-color: #1e293b; /* Paneles un poco más claros para dar relieve */
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+body.dark .header {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+body.dark .inbox h3,
+body.dark .quadrant h3,
+body.dark .task-text {
+    color: #f8fafc;
+}
+
+body.dark .subtitle,
+body.dark .empty-state {
+    color: #94a3b8;
+    border-color: #334155;
+}
+
+body.dark .drop-zone.drag-over {
+    background-color: #0f172a;
+    border-color: #475569;
+}
+
+/* Selector de días en modo oscuro */
+body.dark .day-selector button {
+    background-color: #1e293b;
+    color: #94a3b8;
+    border-color: #334155;
+}
+
+body.dark .day-selector button:hover {
+    background-color: #334155;
+    color: #f8fafc;
+}
+
+body.dark .day-selector button.active {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+/* Inputs y botones */
+body.dark .new-task-input,
+body.dark .new-task-select,
+body.dark .add-category-row input {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark .new-task-btn,
+body.dark .add-category-row button {
+    background-color: #3b82f6;
+}
+
+body.dark .new-task-btn:hover,
+body.dark .add-category-row button:hover {
+    background-color: #2563eb;
+}
+
+/* Interacciones de las tarjetas */
+body.dark .task-card.completed {
+    background-color: #0f172a;
+    opacity: 0.6;
+}
+
+body.dark .task-card:hover:not(.is-dragging) {
+    border-color: #64748b;
+}
+
+body.dark .task-card.is-dragging {
+    background-color: #334155;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    border-color: #64748b;
+}
+
+body.dark .category-badge {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+/* Botón de alternar tema */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 15px;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+}

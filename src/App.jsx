@@ -36,6 +36,19 @@ function App() {
 
   const [newTaskText, setNewTaskText] = useState("");
   const [newTaskTag, setNewTaskTag] = useState("");
+  // Memoria del Modo Oscuro
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => localStorage.getItem("darkMode") === "true",
+  );
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", isDarkMode);
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
   // 1. LEER DATOS DE LA NUBE EN TIEMPO REAL
   useEffect(() => {
@@ -266,19 +279,26 @@ function App() {
         <header className="header">
           <h2>Matriz de Eisenhower</h2>
           <div className="day-selector">
+            {/* NUEVO BOTÓN DE MODO OSCURO */}
+            <button
+              className="theme-toggle-btn"
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              title={
+                isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
+            >
+              {isDarkMode ? "☀️" : "🌙"}
+            </button>
+
             <button
               onClick={() => setSelectedDate("2026-06-07")}
-              style={{
-                backgroundColor: selectedDate === "2026-06-07" ? "#3b82f6" : "",
-              }}
+              className={selectedDate === "2026-06-07" ? "active" : ""}
             >
               Hoy
             </button>
             <button
               onClick={() => setSelectedDate("2026-06-08")}
-              style={{
-                backgroundColor: selectedDate === "2026-06-08" ? "#3b82f6" : "",
-              }}
+              className={selectedDate === "2026-06-08" ? "active" : ""}
             >
               Mañana
             </button>
