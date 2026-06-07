@@ -180,17 +180,24 @@ function App() {
 
   const tasksForToday = tasks.filter((task) => task.date === selectedDate);
 
+  // NUEVO RENDERIZADOR UX/UI
   const renderListaTareas = (idContenedor, tareasFiltradas) => {
     const tareasOrdenadas = tareasFiltradas.sort((a, b) => a.order - b.order);
 
     return (
       <Droppable droppableId={idContenedor}>
-        {(provided) => (
+        {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            style={{ flexGrow: 1, minHeight: "80px" }}
+            // UX: Se ilumina si arrastras algo por encima
+            className={`drop-zone ${snapshot.isDraggingOver ? "drag-over" : ""}`}
           >
+            {/* UX: Estado vacío si no hay tareas */}
+            {tareasOrdenadas.length === 0 && !snapshot.isDraggingOver && (
+              <div className="empty-state">No hay tareas en esta zona</div>
+            )}
+
             {tareasOrdenadas.map((task, index) => {
               let colorClass = task.quadrant
                 ? `in-${task.quadrant.toLowerCase()}`
@@ -201,12 +208,13 @@ function App() {
 
               return (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
-                  {(provided) => (
+                  {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className={`task-card ${colorClass} ${statusClass}`}
+                      // UX: Añade clase 'is-dragging' cuando la tarjeta vuela
+                      className={`task-card ${colorClass} ${statusClass} ${snapshot.isDragging ? "is-dragging" : ""}`}
                     >
                       <input
                         type="checkbox"
@@ -220,12 +228,25 @@ function App() {
                           {task.tag}
                         </span>
                       </div>
+
                       <button
                         onClick={() => deleteTask(task.id)}
                         className="delete-task-btn"
                         title="Eliminar tarea"
                       >
-                        🗑️
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
                       </button>
                     </div>
                   )}
@@ -353,15 +374,7 @@ function App() {
             <div className="quadrant">
               <h3>
                 🔥 Hacer <br />
-                <span
-                  style={{
-                    fontSize: "0.75rem",
-                    fontWeight: "normal",
-                    color: "#6b7280",
-                  }}
-                >
-                  (Urgente e Importante)
-                </span>
+                <span className="subtitle">(Urgente e Importante)</span>
               </h3>
               {renderListaTareas(
                 "Q1",
@@ -372,15 +385,7 @@ function App() {
             <div className="quadrant">
               <h3>
                 🌱 Planificar <br />
-                <span
-                  style={{
-                    fontSize: "0.75rem",
-                    fontWeight: "normal",
-                    color: "#6b7280",
-                  }}
-                >
-                  (Importante, pero No Urgente)
-                </span>
+                <span className="subtitle">(Importante, pero No Urgente)</span>
               </h3>
               {renderListaTareas(
                 "Q2",
@@ -391,15 +396,7 @@ function App() {
             <div className="quadrant">
               <h3>
                 🤝 Delegar <br />
-                <span
-                  style={{
-                    fontSize: "0.75rem",
-                    fontWeight: "normal",
-                    color: "#6b7280",
-                  }}
-                >
-                  (Urgente, pero No Importante)
-                </span>
+                <span className="subtitle">(Urgente, pero No Importante)</span>
               </h3>
               {renderListaTareas(
                 "Q3",
@@ -410,15 +407,7 @@ function App() {
             <div className="quadrant">
               <h3>
                 🗑️ Eliminar <br />
-                <span
-                  style={{
-                    fontSize: "0.75rem",
-                    fontWeight: "normal",
-                    color: "#6b7280",
-                  }}
-                >
-                  (Ni Urgente, Ni Importante)
-                </span>
+                <span className="subtitle">(Ni Urgente, Ni Importante)</span>
               </h3>
               {renderListaTareas(
                 "Q4",
