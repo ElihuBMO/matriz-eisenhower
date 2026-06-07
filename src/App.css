@@ -1,0 +1,364 @@
+/* src/App.css */
+body {
+    margin: 0;
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
+    background-color: #f3f4f6; /* Un gris más suave y moderno */
+    color: #1f2937;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Cabecera más elegante */
+.header {
+    background: linear-gradient(135deg, #111827, #374151);
+    color: white;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+.day-selector button {
+    margin-left: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 20px; /* Botones redondeados */
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.day-selector button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Bandeja de entrada con sombra */
+.inbox {
+    width: 320px;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+    z-index: 5;
+}
+
+.matrix-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f3f4f6;
+}
+
+/* Cuadrantes más limpios */
+.quadrant {
+    background-color: #ffffff;
+    border-radius: 16px; /* Bordes más curvos */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.quadrant h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: #374151;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* TARJETAS DE TAREAS MEJORADAS */
+.task-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 14px;
+    margin-top: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicador de cuadrante lateral más elegante */
+.task-card.in-q1 {
+    border-left: 6px solid #ef4444;
+}
+.task-card.in-q2 {
+    border-left: 6px solid #3b82f6;
+}
+.task-card.in-q3 {
+    border-left: 6px solid #f59e0b;
+}
+.task-card.in-q4 {
+    border-left: 6px solid #9ca3af;
+}
+
+/* Contenedor del texto y la etiqueta */
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.task-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* DISEÑO DE LAS ETIQUETAS (TAGS) */
+.task-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    align-self: flex-start;
+    letter-spacing: 0.5px;
+}
+
+/* Colores de las etiquetas */
+.tag-trabajo {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+.tag-personal {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+.tag-estudio {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+.tag-casa {
+    background-color: #f3e8ff;
+    color: #7e22ce;
+}
+
+/* Estado completado */
+.task-card.completed {
+    opacity: 0.6;
+    background-color: #f9fafb;
+    border-left: 6px solid #d1d5db;
+}
+
+.task-card.completed .task-text {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.checkbox {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: #3b82f6;
+}
+
+/* FORMULARIO MEJORADO */
+.new-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.new-task-input,
+.new-task-select {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.new-task-input:focus,
+.new-task-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.new-task-btn {
+    padding: 10px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.new-task-btn:hover {
+    background-color: #059669;
+}
+
+/* src/App.css - Añadir antes del @media */
+
+/* Estilo por defecto para categorías creadas por el usuario */
+.tag-custom {
+    background-color: #e5e7eb;
+    color: #4b5563;
+}
+
+/* PANEL DE ADMINISTRACIÓN DE CATEGORÍAS */
+.category-manager {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.category-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.delete-cat-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+.delete-cat-btn:hover {
+    color: #b91c1c;
+}
+
+.add-category-row {
+    display: flex;
+    gap: 5px;
+}
+
+.add-category-row input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.add-category-row button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.toggle-categories-btn {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 5px;
+    padding: 0;
+}
+
+/* src/App.css (Añadir al final del archivo) */
+
+/* =========================================
+   DISEÑO RESPONSIVO (Móviles y Tablets)
+   ========================================= */
+
+@media (max-width: 900px) {
+    /* La cabecera se adapta */
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* Cambiamos la disposición general de horizontal a vertical */
+    .main-content {
+        flex-direction: column;
+        overflow-y: auto; /* Permitimos el scroll en toda la página */
+    }
+
+    /* La bandeja de entrada toma el 100% del ancho y se limita su altura */
+    .inbox {
+        width: auto;
+        border-right: none;
+        border-bottom: 2px solid #e5e7eb;
+        max-height: 35vh; /* Ocupa un 35% de la pantalla para dejar ver la matriz */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* La matriz pasa de ser un grid 2x2 a una lista vertical (1 columna) */
+    .matrix-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        overflow-y: visible;
+    }
+
+    /* Ajustamos las tarjetas para pantallas táctiles */
+    .task-card {
+        padding: 16px; /* Más área para tocar con el dedo */
+    }
+
+    .checkbox {
+        width: 24px; /* Checkbox más grande para el pulgar */
+        height: 24px;
+    }
+}
