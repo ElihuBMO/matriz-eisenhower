@@ -315,6 +315,28 @@ body {
     padding: 0;
 }
 
+/* BOTÓN DE ELIMINAR TAREA */
+.delete-task-btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-task-btn:hover {
+    color: #ef4444; /* Se vuelve rojo */
+    background-color: #fee2e2;
+    opacity: 1;
+}
+
 /* src/App.css (Añadir al final del archivo) */
 
 /* =========================================

@@ -7,6 +7,7 @@ import {
   onSnapshot,
   addDoc,
   updateDoc,
+  deleteDoc,
   setDoc,
   writeBatch,
 } from "firebase/firestore";
@@ -116,6 +117,16 @@ function App() {
     await updateDoc(doc(db, "tasks", taskId), { status: newStatus });
   };
 
+  // 7. ELIMINAR TAREA DE LA NUBE
+  const deleteTask = async (taskId) => {
+    const confirmar = window.confirm(
+      "¿Estás seguro de que deseas eliminar esta tarea de forma permanente?",
+    );
+    if (confirmar) {
+      await deleteDoc(doc(db, "tasks", taskId));
+    }
+  };
+
   // 6. ARRASTRAR Y SOLTAR: ACTUALIZACIÓN MÚLTIPLE EN LA NUBE
   const manejarArrastre = async (resultado) => {
     const { destination, source } = resultado;
@@ -209,6 +220,13 @@ function App() {
                           {task.tag}
                         </span>
                       </div>
+                      <button
+                        onClick={() => deleteTask(task.id)}
+                        className="delete-task-btn"
+                        title="Eliminar tarea"
+                      >
+                        🗑️
+                      </button>
                     </div>
                   )}
                 </Draggable>
