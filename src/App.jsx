@@ -40,6 +40,8 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(
     () => localStorage.getItem("darkMode") === "true",
   );
+  // Estado para el Modo Enfoque
+  const [focusQ1, setFocusQ1] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("darkMode", isDarkMode);
@@ -279,6 +281,14 @@ function App() {
         <header className="header">
           <h2>Matriz de Eisenhower</h2>
           <div className="day-selector">
+            {/* NUEVO BOTÓN DE MODO ENFOQUE */}
+            <button
+              className={`focus-btn ${focusQ1 ? "active" : ""}`}
+              onClick={() => setFocusQ1(!focusQ1)}
+              title="Mostrar solo Urgente e Importante"
+            >
+              🎯 {focusQ1 ? "Salir de Enfoque" : "Modo Enfoque"}
+            </button>
             {/* NUEVO BOTÓN DE MODO OSCURO */}
             <button
               className="theme-toggle-btn"
@@ -390,7 +400,9 @@ function App() {
             )}
           </aside>
 
-          <section className="matrix-grid">
+          {/* Añadimos la clase focus-mode si el estado es true */}
+          <section className={`matrix-grid ${focusQ1 ? "focus-mode" : ""}`}>
+            {/* El Cuadrante 1 SIEMPRE se muestra */}
             <div className="quadrant">
               <h3>
                 🔥 Hacer <br />
@@ -402,38 +414,49 @@ function App() {
               )}
             </div>
 
-            <div className="quadrant">
-              <h3>
-                🌱 Planificar <br />
-                <span className="subtitle">(Importante, pero No Urgente)</span>
-              </h3>
-              {renderListaTareas(
-                "Q2",
-                tasksForToday.filter((t) => t.quadrant === "Q2"),
-              )}
-            </div>
+            {/* Los Cuadrantes 2, 3 y 4 SOLO se muestran si NO estamos en modo enfoque */}
+            {!focusQ1 && (
+              <>
+                <div className="quadrant">
+                  <h3>
+                    🌱 Planificar <br />
+                    <span className="subtitle">
+                      (Importante, pero No Urgente)
+                    </span>
+                  </h3>
+                  {renderListaTareas(
+                    "Q2",
+                    tasksForToday.filter((t) => t.quadrant === "Q2"),
+                  )}
+                </div>
 
-            <div className="quadrant">
-              <h3>
-                🤝 Delegar <br />
-                <span className="subtitle">(Urgente, pero No Importante)</span>
-              </h3>
-              {renderListaTareas(
-                "Q3",
-                tasksForToday.filter((t) => t.quadrant === "Q3"),
-              )}
-            </div>
+                <div className="quadrant">
+                  <h3>
+                    🤝 Delegar <br />
+                    <span className="subtitle">
+                      (Urgente, pero No Importante)
+                    </span>
+                  </h3>
+                  {renderListaTareas(
+                    "Q3",
+                    tasksForToday.filter((t) => t.quadrant === "Q3"),
+                  )}
+                </div>
 
-            <div className="quadrant">
-              <h3>
-                🗑️ Eliminar <br />
-                <span className="subtitle">(Ni Urgente, Ni Importante)</span>
-              </h3>
-              {renderListaTareas(
-                "Q4",
-                tasksForToday.filter((t) => t.quadrant === "Q4"),
-              )}
-            </div>
+                <div className="quadrant">
+                  <h3>
+                    🗑️ Eliminar <br />
+                    <span className="subtitle">
+                      (Ni Urgente, Ni Importante)
+                    </span>
+                  </h3>
+                  {renderListaTareas(
+                    "Q4",
+                    tasksForToday.filter((t) => t.quadrant === "Q4"),
+                  )}
+                </div>
+              </>
+            )}
           </section>
         </main>
       </div>

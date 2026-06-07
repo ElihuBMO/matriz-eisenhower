@@ -480,3 +480,58 @@ body.dark .category-badge {
 .theme-toggle-btn:hover {
     transform: scale(1.1);
 }
+
+/* =========================================
+   MODO ENFOQUE (FOCUS MODE)
+   ========================================= */
+
+/* Cuando el modo enfoque está activo, la cuadrícula pasa a ser de 1 sola celda gigante */
+.matrix-grid.focus-mode {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+/* Diseño del botón de enfoque */
+.focus-btn {
+    background: none;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.focus-btn:hover {
+    background-color: #f1f5f9;
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+/* Cuando el botón está presionado (activo) */
+.focus-btn.active {
+    background-color: #fee2e2;
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+/* Adaptación del botón para el Modo Oscuro */
+body.dark .focus-btn {
+    border-color: #334155;
+    color: #94a3b8;
+}
+body.dark .focus-btn:hover {
+    background-color: #334155;
+    color: #ef4444;
+}
+body.dark .focus-btn.active {
+    background-color: #451a1a;
+    color: #ef4444;
+    border-color: #7f1d1d;
+}
