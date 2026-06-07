@@ -1,6 +1,16 @@
 /* src/App.css */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* El body no hace scroll, lo hacen las zonas internas */
+}
+
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
@@ -326,7 +336,14 @@ body {
         max-height: 40vh;
     }
     .matrix-grid {
-        grid-template-columns: 1fr;
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* Eliminamos grid-template-rows fijo para que crezca naturalmente */
+        grid-auto-rows: minmax(250px, auto);
+        gap: 20px;
+        padding: 24px;
+        overflow-y: auto; /* <--- ESTO ACTIVA EL SCROLL VERTICAL */
     }
 }
 
