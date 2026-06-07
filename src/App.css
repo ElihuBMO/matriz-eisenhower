@@ -92,14 +92,17 @@ body {
     gap: 8px;
 }
 
-/* --- MATRIZ UI --- */
+/* Reemplaza estas tres clases en tu App.css */
+
 .matrix-grid {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; /* Forzamos a que sean exactamente 2 filas */
     gap: 20px;
     padding: 24px;
+    overflow: hidden; /* La cuadrícula global NO hace scroll */
+    min-height: 0; /* Truco vital para que flexbox no rompa la pantalla */
 }
 
 .quadrant {
@@ -112,6 +115,34 @@ body {
     box-shadow:
         0 1px 3px 0 rgb(0 0 0 / 0.1),
         0 1px 2px -1px rgb(0 0 0 / 0.1);
+    overflow: hidden; /* Mantiene a los hijos dentro de la caja */
+    min-height: 0; /* Obliga al cuadrante a respetar su tamaño en la pantalla */
+}
+
+.drop-zone {
+    flex-grow: 1;
+    min-height: 0; /* Truco vital para permitir el scroll interno */
+    overflow-y: auto; /* AQUÍ ESTÁ LA MAGIA: El scroll ocurre solo en la lista de tareas */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    padding-right: 5px; /* Un poco de espacio para que no choque con la barra */
+}
+
+/* (Opcional) Barras de scroll elegantes y discretas */
+.drop-zone::-webkit-scrollbar,
+.inbox::-webkit-scrollbar {
+    width: 6px;
+}
+.drop-zone::-webkit-scrollbar-thumb,
+.inbox::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+}
+body.dark .drop-zone::-webkit-scrollbar-thumb,
+body.dark .inbox::-webkit-scrollbar-thumb {
+    background-color: #475569;
 }
 
 .quadrant h3 {
@@ -129,18 +160,6 @@ body {
     color: #94a3b8;
     display: block;
     margin-top: 4px;
-}
-
-/* --- ZONAS DE ARRASTRE (UX) --- */
-.drop-zone {
-    flex-grow: 1;
-    min-height: 100px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 20px;
 }
 
 .drop-zone.drag-over {
